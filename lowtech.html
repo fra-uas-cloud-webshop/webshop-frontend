@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+  <link rel="stylesheet" href="lowtech.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <h1>Product Catalog</h1>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Product Catalog Section -->
+    <section class="product-catalog">
+      <h2>Choose Your Products</h2>
+      <div class="product-list">
+        <!-- Product: SaaS -->
+        <div class="product-item">
+          <h3>SaaS</h3>
+          <p>Software as a Service: Access applications over the Internet.</p>
+          <p class="price">$50/month</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <!-- Product: IaaS -->
+        <div class="product-item">
+          <h3>IaaS</h3>
+          <p>Infrastructure as a Service: Virtualized computing resources.</p>
+          <p class="price">$100/month</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <!-- Product: PaaS -->
+        <div class="product-item">
+          <h3>PaaS</h3>
+          <p>Platform as a Service: Develop and deploy applications quickly.</p>
+          <p class="price">$75/month</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <!-- Product: FaaS -->
+        <div class="product-item">
+          <h3>FaaS</h3>
+          <p>Function as a Service: Run and scale functions on demand.</p>
+          <p class="price">$25/month</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shopping Cart Section -->
+    <section class="shopping-cart">
+      <h2>Shopping Cart</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example cart item -->
+          <tr>
+            <td>SaaS</td>
+            <td>$50/month</td>
+            <td>
+              <input type="number" value="1" min="1" class="quantity">
+            </td>
+            <td>$50/month</td>
+            <td>
+              <button class="remove-item">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="cart-total">
+        <p>Total: $50/month</p>
+      </div>
+      <button class="checkout-button">Proceed to Checkout</button>
+    </section>
+  </main>
+</body>
+</html>
