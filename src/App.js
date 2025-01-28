@@ -1,21 +1,23 @@
 import React from 'react';
-import Counter from './components/Counter';
-import Navigator from './components/navigator/Navigator';
 import { Route, Routes } from 'react-router';
-import Home from './components/home/Home.js';
-import Services from './components/services/Services.js';
-import Footer from './components/common/Footer.js';
+import Navigator from './components/navigator/Navigator';
+import Home from './components/home/Home';
+import Services from './components/services/Services';
+import Footer from './components/common/Footer';
 
 function App() {
   return (
-    <div className="app">
-      <Navigator sticky="top"></Navigator>
-      <Routes>
-        <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='' element={<Home></Home>}></Route>
-        <Route path='services' element={<Services />}></Route>
-      </Routes>
-      <Footer sticky='bottom'> </Footer>
+    <div className="d-flex flex-column min-vh-100">
+      <Navigator sticky="top" />
+      <div className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="*" element={<div>404 Not Found</div>} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 }
