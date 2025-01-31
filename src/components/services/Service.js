@@ -9,7 +9,7 @@ const Service = ({product}) => {
     <div class="card-body">
       <h5 class="card-title">{product.productName}</h5>
       <p class="card-text">{product.description}</p>
-      <Link to={`details/${product._id}`} ><button product={product} className="btn btn-sm btn-primary">details</button></Link>
+      <Link to={`details/${product._id}`} state={{ product }}><button product={product} className="btn btn-sm btn-primary">details</button></Link>
     </div>
   </div>
     </div>
