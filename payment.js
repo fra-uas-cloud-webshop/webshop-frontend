@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './responsive.css';
+
 
 const CheckoutPage = () => {
     const [shippingMethod, setShippingMethod] = useState('regular');
