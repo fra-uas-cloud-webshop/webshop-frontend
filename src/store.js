@@ -6,7 +6,7 @@ const initialState = {
   count: 0,
 };
 
-// Reducer commit test
+// Reducer
 const counterReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'INCREMENT':
