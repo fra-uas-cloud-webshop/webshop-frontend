@@ -6,6 +6,7 @@
     "@heroicons/react": "^2.2.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "cra-template": "1.2.0",
     "daisyui": "^4.12.23",
     "react": "^19.0.0",

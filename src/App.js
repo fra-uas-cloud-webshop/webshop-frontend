@@ -5,6 +5,8 @@ import Home from './components/home/Home';
 import Services from './components/services/Services';
 import Footer from './components/common/Footer';
 import ServiceDetails from './components/services/ServiceDetails';
+import Inventory from './components/inventory/Inventory';
+import CartPage from './components/common/CartPage';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="services/details/:id" element={<ServiceDetails />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
       </div>

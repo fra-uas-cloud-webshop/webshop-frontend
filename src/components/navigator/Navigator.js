@@ -16,8 +16,8 @@ function Navigator() {
           <Nav className="me-auto">
             <Nav.Link ><Link className='text-decoration-none text-black' to={'/'}>home</Link></Nav.Link>
             <Nav.Link><Link className='text-decoration-none text-black' to={'/services'}>Services</Link></Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown title="inventory management" id="basic-nav-dropdown">
+              <NavDropdown.Item ><Link className='text-decoration-none text-black' to={'/inventory'}>inventory</Link></NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
@@ -28,7 +28,10 @@ function Navigator() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          
+        <Nav.Link ><Link className='text-decoration-none text-black' to={'/cart'}>cart</Link></Nav.Link>
         </Navbar.Collapse>
+        
       </Container>
     </Navbar>
   );
