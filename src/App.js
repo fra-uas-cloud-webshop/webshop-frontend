@@ -4,6 +4,9 @@ import Navigator from './components/navigator/Navigator';
 import Home from './components/home/Home';
 import Services from './components/services/Services';
 import Footer from './components/common/Footer';
+import PaymentPage from './payment';
+import ShoppingCart from './card';
+
 
 function App() {
   return (
@@ -14,6 +17,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/card" element={<ShoppingCart />} />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
       </div>
