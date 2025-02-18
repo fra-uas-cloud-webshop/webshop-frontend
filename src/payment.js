@@ -89,8 +89,8 @@ const PaymentPage = () => {
           <h2 className="border-b-2 pb-2 mb-4">3. Payment Method</h2>
           <div className="flex items-center mb-2">
             <img
-              src="credit_card.png"
-              alt="Credit Card"
+               src="https://i.ibb.co/RpsprwmB/credit-card.png" alt="Credit Card" border="0"
+              
               className="w-10 mr-2"
             />
             <input
@@ -119,7 +119,7 @@ const PaymentPage = () => {
             />
           </div>
           <div className="flex items-center mt-4">
-            <img src="paypal.png" alt="PayPal" className="w-10 mr-2" />
+            <img src="https://i.ibb.co/hJsLcV1z/paypal.png" alt="Paypal" border="0"  className="w-10 mr-2" />
             <input
               type="radio"
               name="payment"
