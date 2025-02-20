@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Form, Alert, Modal, Row, Col, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -46,16 +47,45 @@ const CheckoutPage = () => {
     };
 
     // Simulate Payment Processing
-    const processPayment = () => {
+    const processPayment = async () => {
         setPaymentStatus("Processing payment...");
-
-        setTimeout(() => {
-            setPaymentStatus("Payment Successful! Redirecting...");
-            localStorage.removeItem("cart"); // Clear cart after successful payment
-            setTimeout(() => navigate("/order-confirmation"), 3000);
-        }, 3000);
+    
+        const orderData = {
+            
+                customerName: userInfo.name,
+                customerEmail: userInfo.email,
+                phone: userInfo.phone,
+                shippingAddress: userInfo.address,
+            items: cart.map(item => ({
+                productId: item._id,
+                productName: item.productName,
+                quantity: item.quantity,
+                price: item.perUnitPrice
+            })),
+            totalAmount: getTotalPrice(), // Total order amount
+            status: "PENDING", // Default order status
+            paymentMethod: paymentMethod, // Selected payment method
+        };
+    
+        try {
+            const response = await fetch("http://localhost:8080/api/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(orderData),
+            });
+    
+            if (response.ok) {
+                setPaymentStatus("Payment Successful! Redirecting...");
+                localStorage.removeItem("cart"); // Clear cart after successful payment
+                setTimeout(() => navigate("/order-confirmation"), 3000);
+            } else {
+                setPaymentStatus("Failed to process the order. Try again.");
+            }
+        } catch (error) {
+            setPaymentStatus("Error connecting to server.");
+        }
     };
-
+    
     return (
         <Container className="mt-4">
             <h2 className="text-center">Checkout</h2>
