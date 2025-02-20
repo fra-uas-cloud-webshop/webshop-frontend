@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ShoppingCart.css";
-import "./responsive.css";
+import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const ShoppingCart = () => {
   const [cart, setCart] = useState([
@@ -19,36 +20,38 @@ const ShoppingCart = () => {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
 
   return (
-    <div className="shopping-cart">
-      <header className="header">
-        <div className="company-name">LowTech</div>
-        <div className="user-menu">
-          <button className="user-button">Emin Guliyev</button>
-          <div className="dropdown">
-            <a href="#">Profile</a>
-            <a href="#">Settings</a>
-            <a href="#">Logout</a>
-          </div>
+    <div className="container">
+      <header className="d-flex justify-content-between align-items-center py-3 border-bottom">
+        <div className="h4">LowTech</div>
+        <div className="dropdown">
+          <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Emin Guliyev
+          </button>
+          <ul className="dropdown-menu">
+            <li><a className="dropdown-item" href="#">Profile</a></li>
+            <li><a className="dropdown-item" href="#">Settings</a></li>
+            <li><a className="dropdown-item" href="#">Logout</a></li>
+          </ul>
         </div>
       </header>
 
-      <div className="cart-container">
-        <h2>Shopping Cart</h2>
+      <div className="card p-4 mt-4">
+        <h2 className="mb-3">Shopping Cart</h2>
         {cart.map(item => (
-          <div key={item.id} className="cart-item">
+          <div key={item.id} className="d-flex justify-content-between align-items-center border-bottom py-2">
             <span>{item.name} - ${item.price.toFixed(2)}</span>
-            <div className="buttons">
-              <button onClick={() => updateQuantity(item.id, -1)}>-</button>
-              <span>{item.quantity}</span>
-              <button onClick={() => updateQuantity(item.id, 1)}>+</button>
-              <button className="remove" onClick={() => removeItem(item.id)}>Remove</button>
+            <div>
+              <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => updateQuantity(item.id, -1)}>-</button>
+              <span className="mx-2">{item.quantity}</span>
+              <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => updateQuantity(item.id, 1)}>+</button>
+              <button className="btn btn-danger btn-sm" onClick={() => removeItem(item.id)}>Remove</button>
             </div>
           </div>
         ))}
-        <div className="summary">Total: ${total}</div>
-        <div className="actions">
-          <button className="back">Back</button>
-          <button className="proceed">Proceed to Payment</button>
+        <div className="mt-3 fw-bold">Total: ${total}</div>
+        <div className="d-flex justify-content-between mt-3">
+          <button className="btn btn-outline-primary">Back</button>
+          <button className="btn btn-success">Proceed to Payment</button>
         </div>
       </div>
     </div>
