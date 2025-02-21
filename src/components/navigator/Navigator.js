@@ -17,6 +17,7 @@ function Navigator() {
             <Nav.Link ><Link className='text-black link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover' to={'/'}>home</Link></Nav.Link>
             <Nav.Link><Link className=' text-black link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover' to={'/services'}>Services</Link></Nav.Link>
             <NavDropdown title="admin" id="basic-nav-dropdown" className='text-black link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover'>
+              <NavDropdown.Item ><Link className='text-black link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-black' to={'/create-product'}>Create Product</Link></NavDropdown.Item>
               <NavDropdown.Item ><Link className='text-black link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-black' to={'/inventory'}>inventory</Link></NavDropdown.Item>
               <NavDropdown.Item ><Link className='text-black link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-black' to={'/orderManagement'}>Manage Orders</Link></NavDropdown.Item>
             </NavDropdown>

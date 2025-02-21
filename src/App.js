@@ -11,6 +11,7 @@ import MyOrders from './components/orders/MyOrders';
 import OrderManagement from './components/orders/OrderManagement';
 import CheckoutPage from './components/common/CheckoutPage';
 import OrderConfirmation from './components/orders/OrderConfirmation';
+import CreateProduct from './components/products/CreateProduct';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="services/details/:id" element={<ServiceDetails />} />
+          <Route path="/create-product" element={<CreateProduct />} />
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
