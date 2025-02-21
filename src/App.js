@@ -7,6 +7,10 @@ import Footer from './components/common/Footer';
 import ServiceDetails from './components/services/ServiceDetails';
 import Inventory from './components/inventory/Inventory';
 import CartPage from './components/common/CartPage';
+import MyOrders from './components/orders/MyOrders';
+import OrderManagement from './components/orders/OrderManagement';
+import CheckoutPage from './components/common/CheckoutPage';
+import OrderConfirmation from './components/orders/OrderConfirmation';
 
 function App() {
   return (
@@ -20,6 +24,10 @@ function App() {
           <Route path="services/details/:id" element={<ServiceDetails />} />
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/myOrders" element={<MyOrders />} />
+          <Route path="/orderManagement" element={<OrderManagement />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
       </div>

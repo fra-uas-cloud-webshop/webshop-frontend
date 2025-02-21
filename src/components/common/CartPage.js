@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 const CartPage = () => {
     // ✅ Load cart from localStorage when component mounts
@@ -22,6 +23,10 @@ const CartPage = () => {
             setCart(JSON.parse(storedCart));
         }
     }, []);
+    const navigate=useNavigate();
+    const handleCheckout=()=>{
+        navigate('/checkout')
+    }
 
     // Increase quantity
     const increaseQuantity = (id) => {
@@ -87,7 +92,7 @@ const CartPage = () => {
                     </Table>
 
                     <h4>Total: ${getTotalPrice()}</h4>
-                    <Button variant="success" onClick={() => alert("Proceeding to checkout...")}>
+                    <Button variant="success" onClick={handleCheckout}>
                         Proceed to Checkout
                     </Button>
                 </>
