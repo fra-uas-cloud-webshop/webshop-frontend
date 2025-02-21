@@ -2,8 +2,8 @@ import React from 'react';
 
 const OrderManagement = () => {
     return (
-        <div>
-            order management
+        <div className='container'>
+            
         </div>
     );
 };

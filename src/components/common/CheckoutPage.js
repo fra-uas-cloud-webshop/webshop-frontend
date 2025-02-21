@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Form, Alert, Modal, Row, Col, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ const CheckoutPage = () => {
                 customerEmail: userInfo.email,
                 phone: userInfo.phone,
                 shippingAddress: userInfo.address,
-            items: cart.map(item => ({
+            items:cart.map(item => ({
                 productId: item._id,
                 productName: item.productName,
                 quantity: item.quantity,
