@@ -1,0 +1,65 @@
+name: React App CI/CD
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # You can specify the version based on your React app's needs
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test -- --coverage --watch=false
+
+      - name: Build React App
+        run: npm run build
+
+  dockerize-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Build Docker Image
+        run: |
+          IMAGE_NAME="ghcr.io/${{ github.repository }}/react-frontend:${{ github.sha }}"
+          docker build -t $IMAGE_NAME ./frontend
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push Docker Image to GitHub Container Registry
+        run: docker push ${{ env.IMAGE_NAME }}
+
+      - name: Delete Docker Image Locally (Optional)
+        run: docker rmi ${{ env.IMAGE_NAME }} || echo "Image not found locally"
