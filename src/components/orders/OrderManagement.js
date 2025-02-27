@@ -143,8 +143,9 @@ const OrderManagement = () => {
                                             onChange={(e) => updateOrderStatus(order, e.target.value)}
                                         >
                                             <option value="">Select Status</option>
-                                            <option value="PENDING">Pending</option>
-                                            <option value="PROCESSED">Processing</option>
+                                            <option value="PENDING" disabled={order.status !== "PENDING"}>Pending</option>
+                                            <option value="PROCESSED" disabled={order.status === "SHIPPED" || order.status === "DELIVERED"}>Processing</option>
+                                            <option value="SHIPPED" disabled={order.status === "DELIVERED"}>Shipping</option>
                                             <option value="DELIVERED">Completed</option>
                                         </Form.Select>
                                         {updating === orderId && <p className="text-primary mt-1">Updating...</p>}

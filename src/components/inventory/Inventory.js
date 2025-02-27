@@ -112,7 +112,7 @@ const InventoryPage = () => {
             setProducts(products.filter((p) => p.inventoryId !== inventoryId));
             setSuccessMessage("Product deleted successfully!");
         } catch (error) {
-            setErrorMessage(error.message);
+            setErrorMessage("you cannot delete a prodiuct which is ordered by customer!, that's unethical!");
         } finally {
             setDeleting(null);
         }
