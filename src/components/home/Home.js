@@ -34,9 +34,7 @@ const Home = () => {
       <section className="container py-5 text-center">
         <h2 className="mb-4">About WebShop</h2>
         <p> 
-At WebShop, we specialize in providing cutting-edge web services tailored to meet your business needs. From high-speed internet solutions to advanced cloud hosting, we ensure seamless connectivity and robust digital infrastructure. Our mission is to empower businesses and individuals with reliable, secure, and scalable web solutions that drive success in the digital era.
-
-With a commitment to innovation and customer satisfaction, we offer a range of services including website development, cloud storage, cybersecurity solutions, and enterprise networking. Our expert team is dedicated to delivering top-tier support and technology to help you stay ahead in the online world.
+        Welcome to WebShop, your ultimate destination for stylish, high-quality furniture. Whether you’re looking to revamp your living space, furnish your office, or add timeless pieces to your home, we’ve got you covered. Explore our carefully curated collection of modern, classic, and custom-made furniture designed to suit every taste and budget. Shop with confidence and transform your space today!
 </p>
       </section>
     </div>
