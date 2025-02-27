@@ -11,12 +11,14 @@ const ServiceDetails = () => {
 
     // Fetch product details from API or mock data
     useEffect(() => {
-        fetch(`https://manufacturer-epp7.onrender.com/product/${id}`)
+        fetch(`http://localhost:8080/api/products/${id}`)
             .then(response => response.json())
             .then(data => {
+        
                 // Ensure price is a number and remove '$' if present
-                const formattedProduct = { ...data, perUnitPrice: parseFloat(data.perUnitPrice.replace("$", "")) };
-                setProduct(formattedProduct);
+                // const formattedProduct = { ...data, price: parseFloat(data.price.replace("$", "")) };
+                
+                setProduct(data);
                 setLoading(false);
             })
             .catch(() => {
@@ -32,7 +34,7 @@ const ServiceDetails = () => {
     // Function to add product to cart (uses localStorage)
     const addToCart = () => {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existingProduct = cart.find((item) => item._id === product._id);
+        const existingProduct = cart.find((item) => item.id === product.id);
 
         if (existingProduct) {
             existingProduct.quantity += 1; // Increase quantity if product exists
@@ -41,7 +43,7 @@ const ServiceDetails = () => {
         }
 
         localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart
-        setCartMessage(`${product.productName} has been added to your cart.`);
+        setCartMessage(`${product.name} has been added to your cart.`);
         setTimeout(() => setCartMessage(""), 3000);
     };
 
@@ -52,8 +54,8 @@ const ServiceDetails = () => {
                     <Card className="shadow-lg p-3">
                         <Card.Img 
                             variant="top" 
-                            src={product.img || "https://via.placeholder.com/300"} 
-                            alt={product.productName} 
+                            src={product.imageUrl || "https://via.placeholder.com/300"} 
+                            alt={product.name} 
                             className="img-fluid rounded"
                         />
                     </Card>
@@ -61,15 +63,15 @@ const ServiceDetails = () => {
                 <Col md={6}>
                     <Card className="shadow-lg p-3">
                         <Card.Body>
-                            <Card.Title className="fw-bold">{product.productName}</Card.Title>
+                            <Card.Title className="fw-bold">{product.name}</Card.Title>
                             <Card.Text><strong>Category:</strong> {product.category}</Card.Text>
                             <Card.Text><strong>Description:</strong> {product.description}</Card.Text>
                             <Card.Text className="text-success fw-bold">
-                                <strong>Price:</strong> ${product.perUnitPrice}
+                                <strong>Price:</strong> ${product.price}
                             </Card.Text>
                             <Card.Text>
-                                <strong>Stock:</strong> {product.availableQuantity} 
-                                {product.availableQuantity < 5 && <span className="text-danger"> (Low Stock!)</span>}
+                                <strong>Stock:</strong> {product.quantity} 
+                                {product.quantity < 5 && <span className="text-danger"> (Low Stock!)</span>}
                             </Card.Text>
 
                             {cartMessage && <Alert variant="success">{cartMessage}</Alert>}
@@ -77,10 +79,10 @@ const ServiceDetails = () => {
                             <Button 
                                 variant="primary" 
                                 onClick={addToCart} 
-                                disabled={product.availableQuantity === 0}
+                                disabled={product.quantity === 0}
                                 className="me-2"
                             >
-                                {product.availableQuantity > 0 ? "Add to Cart" : "Out of Stock"}
+                                {product.quantity > 0 ? "Add to Cart" : "Out of Stock"}
                             </Button>
                         </Card.Body>
                     </Card>
