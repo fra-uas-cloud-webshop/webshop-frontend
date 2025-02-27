@@ -7,19 +7,19 @@ const ServiceDetails = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [cartMessage, setCartMessage] = useState("");
+    const [addedToCart, setAddedToCart] = useState(false);
 
-    // Fetch product details from API or mock data
     useEffect(() => {
         fetch(`http://localhost:8080/api/products/${id}`)
             .then(response => response.json())
             .then(data => {
-        
-                // Ensure price is a number and remove '$' if present
-                // const formattedProduct = { ...data, price: parseFloat(data.price.replace("$", "")) };
-                
                 setProduct(data);
                 setLoading(false);
+
+                // Check if the product is already in the cart
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const isAlreadyInCart = cart.some((item) => item.id === data.id);
+                setAddedToCart(isAlreadyInCart);
             })
             .catch(() => {
                 setError("Failed to load product details.");
@@ -31,8 +31,9 @@ const ServiceDetails = () => {
     if (error) return <Alert variant="danger">{error}</Alert>;
     if (!product) return <p>Product not found.</p>;
 
-    // Function to add product to cart (uses localStorage)
     const addToCart = () => {
+        if (product.quantity <= 0 || addedToCart) return; // Prevent adding out-of-stock or already-added items
+
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
         const existingProduct = cart.find((item) => item.id === product.id);
 
@@ -42,15 +43,16 @@ const ServiceDetails = () => {
             cart.push({ ...product, quantity: 1 }); // Add new product
         }
 
-        localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart
-        setCartMessage(`${product.name} has been added to your cart.`);
-        setTimeout(() => setCartMessage(""), 3000);
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Disable button & change text
+        setAddedToCart(true);
     };
 
     return (
         <Container className="mt-4">
-            <Row>
-                <Col md={6}>
+            <Row className="justify-content-center">
+                <Col md={6} className="mb-4">
                     <Card className="shadow-lg p-3">
                         <Card.Img 
                             variant="top" 
@@ -60,7 +62,7 @@ const ServiceDetails = () => {
                         />
                     </Card>
                 </Col>
-                <Col md={6}>
+                <Col md={6} className="mb-4">
                     <Card className="shadow-lg p-3">
                         <Card.Body>
                             <Card.Title className="fw-bold">{product.name}</Card.Title>
@@ -74,15 +76,17 @@ const ServiceDetails = () => {
                                 {product.quantity < 5 && <span className="text-danger"> (Low Stock!)</span>}
                             </Card.Text>
 
-                            {cartMessage && <Alert variant="success">{cartMessage}</Alert>}
-
                             <Button 
-                                variant="primary" 
+                                variant={addedToCart ? "success" : "primary"} 
                                 onClick={addToCart} 
-                                disabled={product.quantity === 0}
-                                className="me-2"
+                                disabled={product.quantity === 0 || addedToCart}
+                                className="w-100"
                             >
-                                {product.quantity > 0 ? "Add to Cart" : "Out of Stock"}
+                                {product.quantity === 0
+                                    ? "Out of Stock"
+                                    : addedToCart
+                                    ? "Item in Cart "
+                                    : "Add to Cart"}
                             </Button>
                         </Card.Body>
                     </Card>
