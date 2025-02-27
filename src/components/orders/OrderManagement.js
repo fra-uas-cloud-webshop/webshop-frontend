@@ -52,7 +52,7 @@ const OrderManagement = () => {
             });
 
             if (!response.ok) {
-                throw new Error("Failed to update order status.");
+                throw new Error("please ensure you have enough product in stock!");
             }
 
             const updatedOrder = await response.json();
@@ -116,6 +116,7 @@ const OrderManagement = () => {
                             <th>Order ID</th>
                             <th>Customer</th>
                             <th>Email</th>
+                            <th>Quantity</th>
                             <th>Total Amount</th>
                             <th>Status</th>
                             <th>Update Status</th>
@@ -131,6 +132,7 @@ const OrderManagement = () => {
                                     <td>{orderId}</td>
                                     <td>{order.customerName}</td>
                                     <td>{order.customerEmail}</td>
+                                    <td>{order?.items[0]?.quantity}</td>
                                     <td>${order.totalAmount.toFixed(2)}</td>
                                     <td>
                                         <span className={`badge bg-${order.status === "DELIVERED" ? "success" : order.status === "PENDING" ? "warning" : order.status === "CANCELLED" ? "danger" : "primary"}`}>

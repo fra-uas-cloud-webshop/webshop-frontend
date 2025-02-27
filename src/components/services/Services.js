@@ -65,9 +65,12 @@ const Services = () => {
                 >
                     <option value=''>All Categories</option>
                     <option value='glass'>glass</option>
-                    <option value='tool'>tool</option>
-                    <option value='cybersecurity'>Cybersecurity</option>
-                    <option value='networking'>Networking</option>
+                    <option value='tool'>tools</option>
+                    <option value='house'>Household Items</option>
+                    <option value='paint'>Paints</option>
+                    <option value='kitchen'>Kitchen Items</option>
+                    <option value='baby'>Baby Items</option>
+                    <option value='bathroom'>Bathroom Items</option>
                 </select>
                 <select 
                     className='form-select w-25' 
