@@ -25,7 +25,7 @@ const CreateProduct = () => {
     setErrorMessage(null);
 
     try {
-      const response = await fetch("http://localhost:8080/api/products", {
+      const response = await fetch(`http://localhost:8080/api/products?quantity=${product.stock}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

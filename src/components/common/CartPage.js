@@ -31,27 +31,27 @@ const CartPage = () => {
     // Increase quantity
     const increaseQuantity = (id) => {
         setCart(cart.map(item => 
-            item._id === id ? { ...item, quantity: item.quantity + 1 } : item
+            item.id === id ? { ...item, quantity: item.quantity + 1 } : item
         ));
     };
 
     // Decrease quantity (prevent going below 1)
     const decreaseQuantity = (id) => {
         setCart(cart.map(item => 
-            item._id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+            item.id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
         ));
     };
 
     // Remove item
     const removeFromCart = (id) => {
-        const updatedCart = cart.filter(item => item._id !== id);
+        const updatedCart = cart.filter(item => item.id !== id);
         setCart(updatedCart);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     };
 
     // Calculate total price
     const getTotalPrice = () => {
-        return cart.reduce((total, item) => total + item.perUnitPrice * item.quantity, 0).toFixed(2);
+        return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
 
     return (
@@ -74,17 +74,17 @@ const CartPage = () => {
                         </thead>
                         <tbody>
                             {cart.map((item) => (
-                                <tr key={item._id}>
-                                    <td>{item.productName}</td>
-                                    <td>${item.perUnitPrice}</td>
+                                <tr key={item.id}>
+                                    <td>{item.name}</td>
+                                    <td>${item.price}</td>
                                     <td>
-                                        <Button variant="outline-primary" size="sm" onClick={() => decreaseQuantity(item._id)}>-</Button>
+                                        <Button variant="outline-primary" size="sm" onClick={() => decreaseQuantity(item.id)}>-</Button>
                                         <span className="mx-2">{item.quantity}</span>
-                                        <Button variant="outline-primary" size="sm" onClick={() => increaseQuantity(item._id)}>+</Button>
+                                        <Button variant="outline-primary" size="sm" onClick={() => increaseQuantity(item.id)}>+</Button>
                                     </td>
-                                    <td>${(item.perUnitPrice * item.quantity).toFixed(2)}</td>
+                                    <td>${(item.price * item.quantity).toFixed(2)}</td>
                                     <td>
-                                        <Button variant="danger" size="sm" onClick={() => removeFromCart(item._id)}>Remove</Button>
+                                        <Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)}>Remove</Button>
                                     </td>
                                 </tr>
                             ))}

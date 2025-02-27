@@ -24,7 +24,7 @@ const CheckoutPage = () => {
 
     // Calculate total price
     const getTotalPrice = () => {
-        return cart.reduce((total, item) => total + item.perUnitPrice * item.quantity, 0).toFixed(2);
+        return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
 
     // Handle input change
@@ -54,17 +54,21 @@ const CheckoutPage = () => {
             
                 customerName: userInfo.name,
                 customerEmail: userInfo.email,
-                phone: userInfo.phone,
+                phoneNumber: userInfo.phone,
                 shippingAddress: userInfo.address,
+                totalAmount: getTotalPrice(), // Total order amount
+                status: "PENDING", // Default order status
+                paymentMethod: paymentMethod, // Selected payment method
             items:cart.map(item => ({
-                productId: item._id,
-                productName: item.productName,
+                // id: item.id,
+                productName: item.name,
+                productPrice:item.price,
                 quantity: item.quantity,
-                price: item.perUnitPrice
+                totalPriceForItem: item.price*item.quantity
             })),
-            totalAmount: getTotalPrice(), // Total order amount
-            status: "PENDING", // Default order status
-            paymentMethod: paymentMethod, // Selected payment method
+            
+           
+           
         };
     
         try {
@@ -73,7 +77,7 @@ const CheckoutPage = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(orderData),
             });
-    
+            
             if (response.ok) {
                 setPaymentStatus("Payment Successful! Redirecting...");
                 localStorage.removeItem("cart"); // Clear cart after successful payment
@@ -133,11 +137,11 @@ const CheckoutPage = () => {
                         </thead>
                         <tbody>
                             {cart.map((item) => (
-                                <tr key={item._id}>
-                                    <td>{item.productName}</td>
-                                    <td>${item.perUnitPrice}</td>
+                                <tr key={item.id}>
+                                    <td>{item.name}</td>
+                                    <td>${item.price}</td>
                                     <td>{item.quantity}</td>
-                                    <td>${(item.perUnitPrice * item.quantity).toFixed(2)}</td>
+                                    <td>${(item.price * item.quantity).toFixed(2)}</td>
                                 </tr>
                             ))}
                         </tbody>
