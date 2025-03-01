@@ -25,7 +25,7 @@ const CreateProduct = () => {
     setErrorMessage(null);
 
     try {
-      const response = await fetch("http://localhost:8080/api/products", {
+      const response = await fetch(`http://localhost:8080/api/products?quantity=${product.stock}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -102,16 +102,25 @@ const CreateProduct = () => {
 
             <Form.Group className="mb-3" controlId="productCategory">
               <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter product category"
+              <Form.Select
                 name="category"
                 value={product.category}
                 onChange={handleChange}
                 required
-              />
+              >
+                <option defaultChecked disabled value="">Select Category</option>
+                
+                
+                    <option value='glass'>glass</option>
+                    <option value='tool'>tools</option>
+                    <option value='house'>Household Items</option>
+                    <option value='paint'>Paints</option>
+                    <option value='kitchen'>Kitchen Items</option>
+                    <option value='baby'>Baby Items</option>
+                    <option value='bathroom'>Bathroom Items</option>
+                
+              </Form.Select>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="productStock">
               <Form.Label>Stock Quantity</Form.Label>
               <Form.Control
