@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Alert, Table, Spinner } from "react-bootstrap";
+import config from "../../config";
 
 const MyOrders = () => {
     const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const MyOrders = () => {
         setError(null);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/orders/by-email?email=${email}`);
+            const response = await fetch(`${config.API_BASE_URL}/api/orders/by-email?email=${email}`);
             
             if (!response.ok) {
                 throw new Error("Failed to fetch orders. Please try again.");
@@ -44,7 +45,7 @@ const MyOrders = () => {
         setCanceling(orderId); // Disable button while canceling
 
         try {
-            const response = await fetch(`http://localhost:8080/api/orders/cancel?orderId=${orderId}`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/orders/cancel?orderId=${orderId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
             });

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Alert, Table, Spinner } from "react-bootstrap";
+import config from "../../config";
 
 const OrderManagement = () => {
     const [orders, setOrders] = useState([]);
@@ -16,7 +17,7 @@ const OrderManagement = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch("http://localhost:8080/api/orders");
+            const response = await fetch(`${config.API_BASE_URL}/api/orders`);
             if (!response.ok) {
                 throw new Error("Failed to fetch orders.");
             }
@@ -45,7 +46,7 @@ const OrderManagement = () => {
         setUpdating(orderId);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/orders/status?orderId=${orderId}`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/orders/status?orderId=${orderId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newStatus),
@@ -80,7 +81,7 @@ const OrderManagement = () => {
         setCancelling(orderId);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/orders/cancel?orderId=${orderId}`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/orders/cancel?orderId=${orderId}`, {
                 method: "PUT",
             });
 

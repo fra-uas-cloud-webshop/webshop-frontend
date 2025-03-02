@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loading from '../common/Loading';
 import Service from './Service';
+import config from "../../config";
 
 const Services = () => {
     const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ const Services = () => {
     const [groupedProducts, setGroupedProducts] = useState({});
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/products')
+        axios.get(`${config.API_BASE_URL}/api/products`)
             .then(response => {
                 const fetchedProducts = response.data;
                 setProducts(fetchedProducts);

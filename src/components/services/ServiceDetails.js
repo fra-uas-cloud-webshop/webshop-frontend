@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import config from "../../config";
 
 const ServiceDetails = () => {
     const { id } = useParams(); // Get product ID from URL
@@ -10,7 +11,7 @@ const ServiceDetails = () => {
     const [addedToCart, setAddedToCart] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/products/${id}`)
+        fetch(`${config.API_BASE_URL}/api/products/${id}`)
             .then(response => response.json())
             .then(data => {
                 setProduct(data);
