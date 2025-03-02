@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Alert, Container, Card } from "react-bootstrap";
+import config from "../../config";
 
 const CreateProduct = () => {
   const [product, setProduct] = useState({
@@ -25,7 +26,7 @@ const CreateProduct = () => {
     setErrorMessage(null);
 
     try {
-      const response = await fetch(`http://localhost:8080/api/products?quantity=${product.stock}`, {
+      const response = await fetch(`${config.API_BASE_URL}/api/products?quantity=${product.stock}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

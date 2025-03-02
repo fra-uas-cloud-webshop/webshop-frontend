@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal, Form, Alert, Container, Badge, Row, Col } from "react-bootstrap";
+import { Table, Button, Modal, Form, Alert, Container, Badge } from "react-bootstrap";
+import config from "../../config";
 
 const InventoryPage = () => {
     const [products, setProducts] = useState([]);
@@ -17,7 +18,7 @@ const InventoryPage = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch("http://localhost:8080/api/products");
+            const response = await fetch(`${config.API_BASE_URL}/api/products`);
             if (!response.ok) throw new Error("Failed to fetch products.");
             const data = await response.json();
             setProducts(data);
@@ -54,7 +55,7 @@ const InventoryPage = () => {
         setErrorMessage(null);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/products/${selectedProduct.inventoryId}`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/products/${selectedProduct.inventoryId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -81,7 +82,7 @@ const InventoryPage = () => {
         setErrorMessage(null);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/inventory/${selectedProduct.inventoryId}?quantity=${selectedProduct.quantity}`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/inventory/${selectedProduct.inventoryId}?quantity=${selectedProduct.quantity}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
             });
@@ -103,7 +104,7 @@ const InventoryPage = () => {
         setErrorMessage(null);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/products/${inventoryId}`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/products/${inventoryId}`, {
                 method: "DELETE",
             });
 
@@ -112,7 +113,7 @@ const InventoryPage = () => {
             setProducts(products.filter((p) => p.inventoryId !== inventoryId));
             setSuccessMessage("Product deleted successfully!");
         } catch (error) {
-            setErrorMessage("you cannot delete a prodiuct which is ordered by customer!, that's unethical!");
+            setErrorMessage("you cannot delete a product which is ordered by customer!, that's unethical!");
         } finally {
             setDeleting(null);
         }

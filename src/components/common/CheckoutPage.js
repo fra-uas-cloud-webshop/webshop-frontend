@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Form, Alert, Modal, Row, Col, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import config from "../../config";
 
 const CheckoutPage = () => {
     const navigate = useNavigate();
@@ -72,7 +73,7 @@ const CheckoutPage = () => {
         };
     
         try {
-            const response = await fetch("http://localhost:8080/api/orders", {
+            const response = await fetch(`${config.API_BASE_URL}/api/orders`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(orderData),
