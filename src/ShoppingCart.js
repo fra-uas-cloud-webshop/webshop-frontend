@@ -25,7 +25,7 @@ const ShoppingCart = () => {
         <div className="h4">LowTech</div>
         <div className="dropdown">
           <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Emin Guliyev
+            User
           </button>
           <ul className="dropdown-menu">
             <li><a className="dropdown-item" href="#">Profile</a></li>
